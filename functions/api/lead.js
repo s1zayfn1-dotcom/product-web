@@ -8,12 +8,16 @@ export async function onRequestPost(context) {
 
     if (!name || !contact || !project) {
       return Response.json(
-        { success: false, message: "Заповніть усі поля." },
+        {
+          success: false,
+          message: "Заповніть усі поля."
+        },
         { status: 400 }
       );
     }
 
-    const message = `🚀 НОВА ЗАЯВКА — PRODUCT WEB
+    const message =
+`🚀 НОВА ЗАЯВКА — PRODUCT WEB
 
 👤 Ім'я:
 ${name}
@@ -24,7 +28,7 @@ ${contact}
 💬 Проєкт:
 ${project}`;
 
-    const telegram = await fetch(
+    const response = await fetch(
       `https://api.telegram.org/bot${context.env.BOT_TOKEN}/sendMessage`,
       {
         method: "POST",
@@ -38,20 +42,29 @@ ${project}`;
       }
     );
 
-    const result = await telegram.json();
+    const result = await response.json();
 
     if (!result.ok) {
       return Response.json(
-        { success: false, message: "Помилка Telegram." },
+        {
+          success: false,
+          message: "Telegram не прийняв повідомлення."
+        },
         { status: 500 }
       );
     }
 
-    return Response.json({ success: true });
+    return Response.json({
+      success: true,
+      message: "Заявку успішно надіслано!"
+    });
 
-  } catch {
+  } catch (error) {
     return Response.json(
-      { success: false, message: "Помилка сервера." },
+      {
+        success: false,
+        message: "Помилка сервера."
+      },
       { status: 500 }
     );
   }
