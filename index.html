@@ -1,0 +1,872 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>PRODUCT WEB — Сайти для бізнесу</title>
+  <meta name="description" content="PRODUCT WEB — створення сучасних сайтів для бізнесу.">
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      background: #11100f;
+      color: #f1ede5;
+      line-height: 1.5;
+      overflow-x: hidden;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .container {
+      width: min(1180px, calc(100% - 40px));
+      margin: 0 auto;
+    }
+
+    /* NAV */
+
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 100;
+      padding: 20px 0;
+      background: rgba(17,16,15,.75);
+      backdrop-filter: blur(18px);
+      border-bottom: 1px solid rgba(255,255,255,.07);
+    }
+
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .logo {
+      font-size: 20px;
+      font-weight: 900;
+      letter-spacing: -1px;
+    }
+
+    .logo span {
+      color: #8e3038;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 30px;
+      align-items: center;
+    }
+
+    .nav-links a {
+      color: #aaa59d;
+      font-size: 14px;
+      transition: .25s;
+    }
+
+    .nav-links a:hover {
+      color: white;
+    }
+
+    .nav-button {
+      padding: 12px 18px;
+      border-radius: 100px;
+      background: #eee8dc;
+      color: #171513 !important;
+      font-weight: 700;
+    }
+
+    /* HERO */
+
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      padding: 150px 0 90px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero:before {
+      content: "";
+      position: absolute;
+      width: 600px;
+      height: 600px;
+      right: -250px;
+      top: 100px;
+      background: radial-gradient(
+        circle,
+        rgba(142,48,56,.25),
+        transparent 65%
+      );
+      pointer-events: none;
+    }
+
+    .eyebrow {
+      color: #a99f94;
+      text-transform: uppercase;
+      letter-spacing: 4px;
+      font-size: 11px;
+      margin-bottom: 25px;
+    }
+
+    h1 {
+      max-width: 900px;
+      font-size: clamp(55px, 9vw, 125px);
+      line-height: .86;
+      letter-spacing: -7px;
+      font-weight: 900;
+    }
+
+    h1 span {
+      color: #8e3038;
+    }
+
+    .hero-text {
+      max-width: 650px;
+      margin-top: 35px;
+      color: #aaa59d;
+      font-size: 18px;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 14px;
+      margin-top: 40px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 16px 24px;
+      border-radius: 100px;
+      font-weight: 800;
+      transition: .25s;
+      border: 1px solid rgba(255,255,255,.12);
+    }
+
+    .btn-primary {
+      background: #eee8dc;
+      color: #171513;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-3px);
+      background: white;
+    }
+
+    .btn-secondary {
+      background: rgba(255,255,255,.04);
+      color: white;
+    }
+
+    .btn-secondary:hover {
+      transform: translateY(-3px);
+      border-color: rgba(255,255,255,.3);
+    }
+
+    /* MARQUEE */
+
+    .marquee {
+      border-top: 1px solid rgba(255,255,255,.08);
+      border-bottom: 1px solid rgba(255,255,255,.08);
+      padding: 20px 0;
+      overflow: hidden;
+      color: #77716a;
+      text-transform: uppercase;
+      letter-spacing: 5px;
+      white-space: nowrap;
+    }
+
+    .marquee-track {
+      display: inline-block;
+      animation: move 20s linear infinite;
+    }
+
+    @keyframes move {
+      from { transform: translateX(0); }
+      to { transform: translateX(-50%); }
+    }
+
+    /* SECTIONS */
+
+    section {
+      padding: 120px 0;
+    }
+
+    .section-label {
+      color: #8e3038;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 4px;
+      margin-bottom: 20px;
+    }
+
+    h2 {
+      font-size: clamp(42px, 6vw, 78px);
+      line-height: .95;
+      letter-spacing: -4px;
+      max-width: 850px;
+    }
+
+    .muted {
+      color: #97918a;
+    }
+
+    /* CARDS */
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 18px;
+      margin-top: 55px;
+    }
+
+    .card {
+      min-height: 330px;
+      padding: 35px;
+      border: 1px solid rgba(255,255,255,.08);
+      border-radius: 28px;
+      background:
+        linear-gradient(
+          145deg,
+          rgba(255,255,255,.055),
+          rgba(255,255,255,.015)
+        );
+      position: relative;
+      overflow: hidden;
+      transition: .3s;
+    }
+
+    .card:hover {
+      transform: translateY(-6px);
+      border-color: rgba(142,48,56,.5);
+    }
+
+    .card-number {
+      color: #8e3038;
+      font-size: 13px;
+      margin-bottom: 100px;
+    }
+
+    .card h3 {
+      font-size: 32px;
+      margin-bottom: 12px;
+    }
+
+    .card p {
+      color: #928d86;
+      max-width: 450px;
+    }
+
+    /* PROJECTS */
+
+    .projects {
+      display: grid;
+      grid-template-columns: 1.2fr .8fr;
+      gap: 18px;
+      margin-top: 55px;
+    }
+
+    .project {
+      min-height: 430px;
+      border-radius: 30px;
+      padding: 35px;
+      background:
+        linear-gradient(
+          145deg,
+          #25211e,
+          #151311
+        );
+      border: 1px solid rgba(255,255,255,.08);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .project:nth-child(2) {
+      min-height: 300px;
+    }
+
+    .project:nth-child(3) {
+      min-height: 300px;
+    }
+
+    .project:after {
+      content: "";
+      position: absolute;
+      width: 280px;
+      height: 280px;
+      right: -100px;
+      bottom: -100px;
+      border-radius: 50%;
+      background: rgba(142,48,56,.25);
+      filter: blur(50px);
+    }
+
+    .project-tag {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      color: #aaa39b;
+    }
+
+    .project h3 {
+      font-size: 44px;
+      letter-spacing: -2px;
+      position: relative;
+      z-index: 2;
+    }
+
+    /* PROCESS */
+
+    .process {
+      margin-top: 55px;
+      border-top: 1px solid rgba(255,255,255,.1);
+    }
+
+    .process-item {
+      display: grid;
+      grid-template-columns: 100px 1fr;
+      gap: 30px;
+      padding: 30px 0;
+      border-bottom: 1px solid rgba(255,255,255,.1);
+    }
+
+    .process-number {
+      color: #8e3038;
+      font-weight: 800;
+    }
+
+    .process-item h3 {
+      font-size: 28px;
+      margin-bottom: 7px;
+    }
+
+    .process-item p {
+      color: #8e8881;
+      max-width: 650px;
+    }
+
+    /* CTA */
+
+    .cta {
+      text-align: center;
+      padding: 150px 0;
+      border-top: 1px solid rgba(255,255,255,.08);
+    }
+
+    .cta h2 {
+      margin: 0 auto;
+    }
+
+    .cta p {
+      max-width: 550px;
+      margin: 25px auto;
+      color: #918c85;
+    }
+
+    .cta .btn {
+      margin-top: 15px;
+    }
+
+    /* FOOTER */
+
+    footer {
+      border-top: 1px solid rgba(255,255,255,.08);
+      padding: 35px 0;
+    }
+
+    .footer-inner {
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      color: #77716b;
+      font-size: 13px;
+    }
+
+    /* MOBILE */
+
+    @media(max-width: 750px) {
+
+      .container {
+        width: min(100% - 28px, 1180px);
+      }
+
+      .nav-links {
+        display: none;
+      }
+
+      h1 {
+        letter-spacing: -4px;
+        font-size: 58px;
+      }
+
+      .hero {
+        padding-top: 140px;
+      }
+
+      section {
+        padding: 80px 0;
+      }
+
+      .grid,
+      .projects {
+        grid-template-columns: 1fr;
+      }
+
+      .card,
+      .project {
+        min-height: 300px;
+      }
+
+      .process-item {
+        grid-template-columns: 50px 1fr;
+        gap: 15px;
+      }
+
+      .footer-inner {
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- NAV -->
+
+  <nav>
+    <div class="container nav-inner">
+
+      <a href="#" class="logo">
+        PRODUCT<span>WEB</span>
+      </a>
+
+      <div class="nav-links">
+        <a href="#services">Послуги</a>
+        <a href="#projects">Проєкти</a>
+        <a href="#process">Процес</a>
+
+        <a
+          href="https://t.me/productwebs"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="nav-button"
+        >
+          Написати
+        </a>
+      </div>
+
+    </div>
+  </nav>
+
+
+  <!-- HERO -->
+
+  <main>
+
+    <section class="hero">
+
+      <div class="container">
+
+        <div class="eyebrow">
+          PRODUCT WEB — DIGITAL STUDIO
+        </div>
+
+        <h1>
+          САЙТИ<br>
+          ЯКІ <span>ПРОДАЮТЬ.</span>
+        </h1>
+
+        <p class="hero-text">
+          Створюємо сучасні сайти для бізнесу, які виглядають професійно,
+          викликають довіру та допомагають клієнтам зробити наступний крок.
+        </p>
+
+        <div class="hero-actions">
+
+          <a
+            href="https://t.me/productwebs"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="btn btn-primary"
+          >
+            Написати в Telegram ↗
+          </a>
+
+          <a href="#projects" class="btn btn-secondary">
+            Дивитися роботи
+          </a>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- MARQUEE -->
+
+    <div class="marquee">
+      <div class="marquee-track">
+        PRODUCT WEB · САЙТИ · ДИЗАЙН · РОЗРОБКА · БІЗНЕС · PRODUCT WEB ·
+        САЙТИ · ДИЗАЙН · РОЗРОБКА · БІЗНЕС ·
+      </div>
+    </div>
+
+
+    <!-- INTRO -->
+
+    <section>
+
+      <div class="container">
+
+        <div class="section-label">
+          01 — Підхід
+        </div>
+
+        <h2>
+          Не просто сторінка.
+          <span class="muted">
+            Повноцінна присутність бізнесу в інтернеті.
+          </span>
+        </h2>
+
+        <div class="grid">
+
+          <div class="card">
+            <div class="card-number">01</div>
+            <h3>Дизайн</h3>
+            <p>
+              Створюємо унікальний візуальний стиль під конкретний бізнес,
+              а не використовуємо один шаблон для всіх.
+            </p>
+          </div>
+
+          <div class="card">
+            <div class="card-number">02</div>
+            <h3>Адаптивність</h3>
+            <p>
+              Сайт нормально виглядає на телефоні, планшеті та комп'ютері.
+            </p>
+          </div>
+
+          <div class="card">
+            <div class="card-number">03</div>
+            <h3>Швидкість</h3>
+            <p>
+              Оптимізована структура без зайвого навантаження,
+              щоб сайт швидко відкривався.
+            </p>
+          </div>
+
+          <div class="card">
+            <div class="card-number">04</div>
+            <h3>Конверсія</h3>
+            <p>
+              Продумуємо кнопки, блоки та структуру так,
+              щоб відвідувачу було зрозуміло, що робити далі.
+            </p>
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- SERVICES -->
+
+    <section id="services">
+
+      <div class="container">
+
+        <div class="section-label">
+          02 — Послуги
+        </div>
+
+        <h2>
+          Все необхідне
+          <span class="muted">
+            для сильного сайту.
+          </span>
+        </h2>
+
+        <div class="grid">
+
+          <div class="card">
+            <div class="card-number">WEB / 01</div>
+            <h3>Сайт для бізнесу</h3>
+            <p>
+              Сайт для барбершопу, кафе, магазину, салону,
+              студії або іншого бізнесу.
+            </p>
+          </div>
+
+          <div class="card">
+            <div class="card-number">WEB / 02</div>
+            <h3>Landing Page</h3>
+            <p>
+              Сторінка під конкретну послугу, продукт
+              або рекламну кампанію.
+            </p>
+          </div>
+
+          <div class="card">
+            <div class="card-number">WEB / 03</div>
+            <h3>Редизайн</h3>
+            <p>
+              Оновлення старого сайту та створення
+              сучасного зовнішнього вигляду.
+            </p>
+          </div>
+
+          <div class="card">
+            <div class="card-number">WEB / 04</div>
+            <h3>Індивідуальний проєкт</h3>
+            <p>
+              Якщо потрібна нестандартна структура,
+              функціонал або особлива подача.
+            </p>
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- PROJECTS -->
+
+    <section id="projects">
+
+      <div class="container">
+
+        <div class="section-label">
+          03 — Проєкти
+        </div>
+
+        <h2>
+          Дизайн,
+          <span class="muted">
+            який запам'ятовується.
+          </span>
+        </h2>
+
+        <div class="projects">
+
+          <div class="project">
+
+            <div class="project-tag">
+              Barbershop
+            </div>
+
+            <h3>
+              BARBER<br>
+              STUDIO
+            </h3>
+
+          </div>
+
+          <div class="project">
+
+            <div class="project-tag">
+              Cafe
+            </div>
+
+            <h3>
+              GREEN<br>
+              CAFE
+            </h3>
+
+          </div>
+
+          <div class="project">
+
+            <div class="project-tag">
+              Store
+            </div>
+
+            <h3>
+              ONLINE<br>
+              STORE
+            </h3>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- PROCESS -->
+
+    <section id="process">
+
+      <div class="container">
+
+        <div class="section-label">
+          04 — Процес
+        </div>
+
+        <h2>
+          Просто.
+          <span class="muted">
+            Швидко. Зрозуміло.
+          </span>
+        </h2>
+
+        <div class="process">
+
+          <div class="process-item">
+
+            <div class="process-number">
+              01
+            </div>
+
+            <div>
+              <h3>Знайомство</h3>
+              <p>
+                Обговорюємо бізнес, цілі, стиль та необхідний функціонал.
+              </p>
+            </div>
+
+          </div>
+
+          <div class="process-item">
+
+            <div class="process-number">
+              02
+            </div>
+
+            <div>
+              <h3>Дизайн</h3>
+              <p>
+                Формуємо структуру та візуальну концепцію майбутнього сайту.
+              </p>
+            </div>
+
+          </div>
+
+          <div class="process-item">
+
+            <div class="process-number">
+              03
+            </div>
+
+            <div>
+              <h3>Розробка</h3>
+              <p>
+                Перетворюємо дизайн на повноцінний адаптивний сайт.
+              </p>
+            </div>
+
+          </div>
+
+          <div class="process-item">
+
+            <div class="process-number">
+              04
+            </div>
+
+            <div>
+              <h3>Запуск</h3>
+              <p>
+                Публікуємо сайт і перевіряємо його роботу на різних пристроях.
+              </p>
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- CTA -->
+
+    <section class="cta">
+
+      <div class="container">
+
+        <div class="section-label">
+          05 — Старт
+        </div>
+
+        <h2>
+          Є бізнес?
+          <span class="muted">
+            Давайте зробимо йому сайт.
+          </span>
+        </h2>
+
+        <p>
+          Напишіть нам у Telegram. Розкажіть про свій бізнес —
+          обговоримо ідею та формат сайту.
+        </p>
+
+        <a
+          href="https://t.me/productwebs"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="btn btn-primary"
+        >
+          Написати в Telegram ↗
+        </a>
+
+      </div>
+
+    </section>
+
+  </main>
+
+
+  <!-- FOOTER -->
+
+  <footer>
+
+    <div class="container footer-inner">
+
+      <div>
+        © 2026 PRODUCT WEB
+      </div>
+
+      <a
+        href="https://t.me/productwebs"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        @productwebs
+      </a>
+
+    </div>
+
+  </footer>
+
+</body>
+</html>
