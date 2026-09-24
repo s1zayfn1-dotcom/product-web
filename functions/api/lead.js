@@ -16,35 +16,49 @@ export async function onRequestPost(context) {
       );
     }
 
-    const message =
-`🚀 НОВА ЗАЯВКА — PRODUCT WEB
+    const token = context.env.BOT_TOKEN;
+    const chatId = context.env.CHAT_ID;
 
-👤 Ім'я:
-${name}
+    if (!token || !chatId) {
+      return Response.json(
+        {
+          success: false,
+          message: "BOT_TOKEN або CHAT_ID не налаштований."
+        },
+        { status: 500 }
+      );
+    }
 
-📱 Контакт:
-${contact}
+    const message = [
+      "🚀 НОВА ЗАЯВКА — PRODUCT WEB",
+      "",
+      "👤 Ім'я:",
+      name,
+      "",
+      "📱 Контакт:",
+      contact,
+      "",
+      "💬 Проєкт:",
+      project
+    ].join("\n");
 
-💬 Проєкт:
-${project}`;
-
-    const response = await fetch(
-      `https://api.telegram.org/bot${context.env.BOT_TOKEN}/sendMessage`,
+    const telegramResponse = await fetch(
+      `https://api.telegram.org/bot${token}/sendMessage`,
       {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
         },
         body: JSON.stringify({
-          chat_id: context.env.CHAT_ID,
+          chat_id: chatId,
           text: message
         })
       }
     );
 
-    const result = await response.json();
+    const telegramResult = await telegramResponse.json();
 
-    if (!result.ok) {
+    if (!telegramResponse.ok || !telegramResult.ok) {
       return Response.json(
         {
           success: false,
