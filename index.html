@@ -1,0 +1,3967 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#151515">
+<meta name="description" content="PRODUCT WEB — створюємо сайти, які виглядають дорого та допомагають бізнесу продавати.">
+
+<title>PRODUCT WEB — Сайти, які запам'ятовують</title>
+
+<style>
+/* =========================================================
+   PRODUCT WEB
+   PREMIUM EDITORIAL SYSTEM
+========================================================= */
+
+@import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&family=Manrope:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,500;0,600;1,500;1,600&display=swap');
+
+:root{
+    --bg:#111111;
+    --bg2:#171717;
+    --panel:#1c1c1c;
+    --panel2:#202020;
+    --text:#f1eee7;
+    --muted:#96928c;
+    --line:rgba(241,238,231,.12);
+    --wine:#711f31;
+    --wine2:#922d43;
+    --wine3:#b94b64;
+    --cream:#e9e2d6;
+    --white:#fffdf8;
+    --radius:24px;
+    --max:1440px;
+    --ease:cubic-bezier(.16,1,.3,1);
+}
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html{
+    scroll-behavior:smooth;
+    background:var(--bg);
+}
+
+body{
+    background:
+        radial-gradient(circle at 80% 0%,rgba(113,31,49,.16),transparent 28%),
+        radial-gradient(circle at 0% 50%,rgba(255,255,255,.025),transparent 30%),
+        var(--bg);
+    color:var(--text);
+    font-family:"Manrope",sans-serif;
+    overflow-x:hidden;
+}
+
+body.locked{
+    overflow:hidden;
+}
+
+::selection{
+    background:var(--cream);
+    color:#111;
+}
+
+a{
+    color:inherit;
+    text-decoration:none;
+}
+
+button,
+input,
+textarea,
+select{
+    font:inherit;
+}
+
+button{
+    border:0;
+    cursor:pointer;
+}
+
+img{
+    max-width:100%;
+    display:block;
+}
+
+/* =========================================================
+   GRAIN
+========================================================= */
+
+body::before{
+    content:"";
+    position:fixed;
+    inset:0;
+    pointer-events:none;
+    z-index:9999;
+    opacity:.035;
+    background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.8'/%3E%3C/svg%3E");
+}
+
+/* =========================================================
+   CURSOR
+========================================================= */
+
+.cursor{
+    position:fixed;
+    width:9px;
+    height:9px;
+    border-radius:50%;
+    background:var(--cream);
+    pointer-events:none;
+    z-index:10000;
+    transform:translate(-50%,-50%);
+    mix-blend-mode:difference;
+    transition:
+        width .3s var(--ease),
+        height .3s var(--ease),
+        opacity .3s;
+}
+
+.cursor-ring{
+    position:fixed;
+    width:38px;
+    height:38px;
+    border:1px solid rgba(241,238,231,.45);
+    border-radius:50%;
+    pointer-events:none;
+    z-index:9999;
+    transform:translate(-50%,-50%);
+    transition:
+        width .35s var(--ease),
+        height .35s var(--ease),
+        background .35s,
+        border-color .35s;
+}
+
+body.hovering .cursor{
+    width:4px;
+    height:4px;
+}
+
+body.hovering .cursor-ring{
+    width:65px;
+    height:65px;
+    border-color:var(--cream);
+}
+
+/* =========================================================
+   SCROLL PROGRESS
+========================================================= */
+
+.progress{
+    position:fixed;
+    top:0;
+    left:0;
+    width:0%;
+    height:2px;
+    background:var(--cream);
+    z-index:10001;
+}
+
+/* =========================================================
+   NAVIGATION
+========================================================= */
+
+.nav{
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    z-index:500;
+    padding:22px 34px;
+    transition:.5s var(--ease);
+}
+
+.nav.scrolled{
+    padding:13px 34px;
+}
+
+.nav-inner{
+    max-width:var(--max);
+    margin:auto;
+    height:64px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:0 18px;
+    border:1px solid transparent;
+    transition:.5s var(--ease);
+}
+
+.nav.scrolled .nav-inner{
+    background:rgba(17,17,17,.78);
+    backdrop-filter:blur(20px);
+    border-color:var(--line);
+    border-radius:20px;
+}
+
+.logo{
+    display:flex;
+    align-items:center;
+    gap:11px;
+    font-weight:800;
+    letter-spacing:-.04em;
+    font-size:18px;
+}
+
+.logo-dot{
+    width:9px;
+    height:9px;
+    border-radius:50%;
+    background:var(--wine3);
+    box-shadow:0 0 25px rgba(185,75,100,.7);
+}
+
+.nav-links{
+    display:flex;
+    gap:30px;
+    color:#aaa6a0;
+    font-size:13px;
+}
+
+.nav-links a{
+    position:relative;
+    transition:.3s;
+}
+
+.nav-links a:hover{
+    color:var(--white);
+}
+
+.nav-links a::after{
+    content:"";
+    position:absolute;
+    left:0;
+    bottom:-6px;
+    width:0;
+    height:1px;
+    background:var(--cream);
+    transition:.35s var(--ease);
+}
+
+.nav-links a:hover::after{
+    width:100%;
+}
+
+.nav-contact{
+    padding:12px 18px;
+    border:1px solid var(--line);
+    border-radius:100px;
+    font-size:12px;
+    transition:.35s var(--ease);
+}
+
+.nav-contact:hover{
+    background:var(--cream);
+    color:#111;
+}
+
+/* =========================================================
+   MOBILE MENU
+========================================================= */
+
+.mobile-toggle{
+    display:none;
+    width:42px;
+    height:42px;
+    border:1px solid var(--line);
+    border-radius:50%;
+    background:transparent;
+    color:var(--text);
+}
+
+.mobile-menu{
+    position:fixed;
+    inset:0;
+    background:rgba(17,17,17,.98);
+    z-index:450;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    transform:translateY(-100%);
+    transition:.7s var(--ease);
+}
+
+.mobile-menu.open{
+    transform:translateY(0);
+}
+
+.mobile-menu-links{
+    display:flex;
+    flex-direction:column;
+    gap:22px;
+    text-align:center;
+}
+
+.mobile-menu-links a{
+    font-size:42px;
+    letter-spacing:-.05em;
+}
+
+/* =========================================================
+   GENERAL
+========================================================= */
+
+.container{
+    width:min(calc(100% - 68px),var(--max));
+    margin:auto;
+}
+
+.section{
+    position:relative;
+    padding:150px 0;
+}
+
+.section-label{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    color:#85817b;
+    font-family:"DM Mono",monospace;
+    font-size:10px;
+    text-transform:uppercase;
+    letter-spacing:.14em;
+}
+
+.section-label::before{
+    content:"";
+    width:30px;
+    height:1px;
+    background:var(--wine3);
+}
+
+.section-title{
+    margin-top:25px;
+    font-size:clamp(48px,7vw,110px);
+    line-height:.91;
+    letter-spacing:-.07em;
+    font-weight:700;
+}
+
+.serif{
+    font-family:"Playfair Display",serif;
+    font-style:italic;
+    font-weight:500;
+}
+
+.muted{
+    color:var(--muted);
+}
+
+/* =========================================================
+   HERO
+========================================================= */
+
+.hero{
+    min-height:100vh;
+    display:flex;
+    align-items:center;
+    padding-top:100px;
+    position:relative;
+    overflow:hidden;
+}
+
+.hero-grid{
+    position:absolute;
+    inset:0;
+    opacity:.12;
+    background-image:
+        linear-gradient(var(--line) 1px,transparent 1px),
+        linear-gradient(90deg,var(--line) 1px,transparent 1px);
+    background-size:80px 80px;
+    mask-image:linear-gradient(to bottom,black,transparent 85%);
+}
+
+.hero-glow{
+    position:absolute;
+    width:700px;
+    height:700px;
+    border-radius:50%;
+    background:radial-gradient(circle,rgba(113,31,49,.34),transparent 65%);
+    top:-280px;
+    right:-160px;
+    filter:blur(20px);
+    pointer-events:none;
+}
+
+.hero-content{
+    position:relative;
+    z-index:2;
+    width:100%;
+}
+
+.hero-top{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-start;
+    margin-bottom:40px;
+}
+
+.eyebrow{
+    font-family:"DM Mono",monospace;
+    font-size:11px;
+    text-transform:uppercase;
+    color:#88847f;
+    letter-spacing:.12em;
+}
+
+.live{
+    display:flex;
+    align-items:center;
+    gap:8px;
+}
+
+.live-dot{
+    width:7px;
+    height:7px;
+    background:#9b4057;
+    border-radius:50%;
+    box-shadow:0 0 15px rgba(155,64,87,.8);
+}
+
+.hero-title{
+    font-size:clamp(72px,13.5vw,205px);
+    line-height:.78;
+    letter-spacing:-.095em;
+    font-weight:800;
+    max-width:1200px;
+}
+
+.hero-title .line{
+    display:block;
+}
+
+.hero-title .indent{
+    padding-left:10vw;
+}
+
+.hero-title .outline{
+    color:transparent;
+    -webkit-text-stroke:1px rgba(241,238,231,.45);
+}
+
+.hero-bottom{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:60px;
+    margin-top:65px;
+    align-items:end;
+}
+
+.hero-description{
+    max-width:470px;
+    font-size:16px;
+    line-height:1.7;
+    color:#aaa6a0;
+}
+
+.hero-actions{
+    display:flex;
+    justify-content:flex-end;
+    gap:12px;
+}
+
+.btn{
+    position:relative;
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    gap:12px;
+    min-height:52px;
+    padding:0 22px;
+    border-radius:100px;
+    font-size:13px;
+    overflow:hidden;
+    transition:.45s var(--ease);
+}
+
+.btn-primary{
+    background:var(--cream);
+    color:#111;
+}
+
+.btn-primary:hover{
+    transform:translateY(-4px);
+    box-shadow:0 18px 45px rgba(233,226,214,.13);
+}
+
+.btn-secondary{
+    border:1px solid var(--line);
+    color:var(--text);
+}
+
+.btn-secondary:hover{
+    background:rgba(255,255,255,.05);
+    transform:translateY(-4px);
+}
+
+.btn-arrow{
+    width:25px;
+    height:25px;
+    border-radius:50%;
+    background:rgba(0,0,0,.12);
+    display:grid;
+    place-items:center;
+}
+
+/* =========================================================
+   MARQUEE
+========================================================= */
+
+.marquee{
+    overflow:hidden;
+    border-top:1px solid var(--line);
+    border-bottom:1px solid var(--line);
+    padding:20px 0;
+    background:#141414;
+}
+
+.marquee-track{
+    display:flex;
+    width:max-content;
+    animation:marquee 26s linear infinite;
+}
+
+.marquee-item{
+    display:flex;
+    align-items:center;
+    gap:40px;
+    margin-right:40px;
+    font-size:13px;
+    text-transform:uppercase;
+    letter-spacing:.14em;
+    color:#77736e;
+}
+
+.marquee-item strong{
+    color:var(--cream);
+    font-weight:500;
+}
+
+.marquee-star{
+    color:var(--wine3);
+}
+
+@keyframes marquee{
+    to{
+        transform:translateX(-50%);
+    }
+}
+
+/* =========================================================
+   INTRO
+========================================================= */
+
+.intro{
+    display:grid;
+    grid-template-columns:.8fr 1.5fr;
+    gap:80px;
+}
+
+.intro-copy{
+    max-width:850px;
+}
+
+.intro-copy p{
+    font-size:clamp(28px,4vw,55px);
+    line-height:1.08;
+    letter-spacing:-.055em;
+}
+
+.intro-copy p span{
+    color:#57534f;
+    transition:.5s;
+}
+
+.intro-copy p:hover span{
+    color:#9d9891;
+}
+
+/* =========================================================
+   SHOWROOM
+========================================================= */
+
+.showroom{
+    padding-top:80px;
+}
+
+.showroom-head{
+    display:flex;
+    justify-content:space-between;
+    align-items:end;
+    margin-bottom:45px;
+}
+
+.showroom-head p{
+    color:var(--muted);
+    max-width:390px;
+    font-size:14px;
+    line-height:1.7;
+}
+
+.lab{
+    border:1px solid var(--line);
+    border-radius:32px;
+    background:
+        linear-gradient(135deg,rgba(255,255,255,.035),transparent 50%),
+        #151515;
+    overflow:hidden;
+    box-shadow:0 40px 100px rgba(0,0,0,.25);
+}
+
+.lab-toolbar{
+    min-height:72px;
+    border-bottom:1px solid var(--line);
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:0 20px;
+    gap:15px;
+}
+
+.lab-left{
+    display:flex;
+    gap:7px;
+    align-items:center;
+}
+
+.window-dots{
+    display:flex;
+    gap:6px;
+}
+
+.window-dots span{
+    width:7px;
+    height:7px;
+    border-radius:50%;
+    background:#4a4744;
+}
+
+.lab-url{
+    margin-left:12px;
+    color:#77736e;
+    font:10px "DM Mono",monospace;
+}
+
+.lab-controls{
+    display:flex;
+    gap:7px;
+}
+
+.lab-chip{
+    border:1px solid var(--line);
+    color:#898580;
+    background:transparent;
+    padding:9px 13px;
+    border-radius:100px;
+    font-size:11px;
+    transition:.3s;
+}
+
+.lab-chip:hover,
+.lab-chip.active{
+    background:var(--cream);
+    color:#111;
+    border-color:var(--cream);
+}
+
+.lab-screen{
+    min-height:620px;
+    position:relative;
+    overflow:hidden;
+    background:#ece6dc;
+    color:#191715;
+    transition:.5s;
+}
+
+.lab-screen.dark{
+    background:#181818;
+    color:#f4eee4;
+}
+
+.lab-screen.wine{
+    background:#551a29;
+    color:#f6e8df;
+}
+
+.preview{
+    min-height:620px;
+    padding:45px;
+    position:relative;
+    overflow:hidden;
+}
+
+.preview-nav{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.preview-logo{
+    font-weight:800;
+    font-size:16px;
+    letter-spacing:-.05em;
+}
+
+.preview-nav-links{
+    display:flex;
+    gap:20px;
+    font-size:9px;
+    opacity:.6;
+}
+
+.preview-main{
+    padding-top:100px;
+    max-width:850px;
+}
+
+.preview-kicker{
+    font:9px "DM Mono",monospace;
+    text-transform:uppercase;
+    letter-spacing:.15em;
+    opacity:.55;
+}
+
+.preview-title{
+    font-size:clamp(50px,7vw,100px);
+    line-height:.84;
+    letter-spacing:-.08em;
+    margin-top:18px;
+}
+
+.preview-title em{
+    font-family:"Playfair Display",serif;
+    font-weight:500;
+}
+
+.preview-description{
+    max-width:390px;
+    margin-top:30px;
+    font-size:12px;
+    line-height:1.6;
+    opacity:.65;
+}
+
+.preview-btn{
+    margin-top:25px;
+    border:1px solid currentColor;
+    border-radius:100px;
+    padding:11px 17px;
+    background:transparent;
+    color:inherit;
+    font-size:10px;
+}
+
+.preview-orb{
+    position:absolute;
+    width:360px;
+    height:360px;
+    right:8%;
+    bottom:-90px;
+    border-radius:50%;
+    background:
+        radial-gradient(circle at 30% 25%,rgba(255,255,255,.8),transparent 8%),
+        radial-gradient(circle at 40% 35%,#8d3047,#401321 55%,#14070b);
+    box-shadow:
+        inset -40px -50px 90px rgba(0,0,0,.45),
+        0 50px 100px rgba(0,0,0,.25);
+    transform:rotate(-15deg);
+    animation:orbFloat 7s ease-in-out infinite;
+}
+
+@keyframes orbFloat{
+    50%{
+        transform:translateY(-25px) rotate(8deg);
+    }
+}
+
+.preview-grid{
+    position:absolute;
+    inset:0;
+    opacity:.08;
+    background-image:
+        linear-gradient(currentColor 1px,transparent 1px),
+        linear-gradient(90deg,currentColor 1px,transparent 1px);
+    background-size:50px 50px;
+    pointer-events:none;
+}
+
+/* =========================================================
+   DEVICE SWITCH
+========================================================= */
+
+.device-bar{
+    display:flex;
+    justify-content:center;
+    gap:7px;
+    padding:15px;
+    border-top:1px solid var(--line);
+}
+
+.device-btn{
+    background:transparent;
+    color:#77736e;
+    border:1px solid var(--line);
+    border-radius:100px;
+    padding:9px 16px;
+    font-size:11px;
+}
+
+.device-btn.active{
+    background:#282624;
+    color:var(--cream);
+}
+
+/* =========================================================
+   PORTFOLIO
+========================================================= */
+
+.portfolio-grid{
+    margin-top:65px;
+    display:grid;
+    grid-template-columns:1.15fr .85fr;
+    gap:18px;
+}
+
+.project{
+    min-height:590px;
+    border:1px solid var(--line);
+    border-radius:30px;
+    overflow:hidden;
+    position:relative;
+    background:#181818;
+    transform-style:preserve-3d;
+    transition:transform .6s var(--ease),border-color .4s;
+}
+
+.project:hover{
+    border-color:rgba(241,238,231,.25);
+}
+
+.project:nth-child(2){
+    margin-top:100px;
+    min-height:490px;
+}
+
+.project:nth-child(3){
+    margin-top:-40px;
+    min-height:470px;
+}
+
+.project:nth-child(4){
+    margin-top:60px;
+    min-height:550px;
+}
+
+.project-bg{
+    position:absolute;
+    inset:0;
+    overflow:hidden;
+}
+
+.project-bg.one{
+    background:
+        radial-gradient(circle at 65% 40%,rgba(185,75,100,.45),transparent 23%),
+        linear-gradient(135deg,#20171a,#101010 70%);
+}
+
+.project-bg.two{
+    background:
+        radial-gradient(circle at 30% 30%,rgba(233,226,214,.22),transparent 18%),
+        linear-gradient(140deg,#24221f,#111);
+}
+
+.project-bg.three{
+    background:
+        linear-gradient(125deg,transparent 40%,rgba(113,31,49,.5)),
+        #151315;
+}
+
+.project-bg.four{
+    background:
+        radial-gradient(circle at 70% 20%,rgba(233,226,214,.14),transparent 20%),
+        linear-gradient(140deg,#24191d,#101010);
+}
+
+.project-visual{
+    position:absolute;
+    inset:70px 55px 100px;
+    border:1px solid rgba(255,255,255,.14);
+    border-radius:15px;
+    background:rgba(255,255,255,.045);
+    backdrop-filter:blur(8px);
+    transform:rotate(-3deg);
+    transition:.7s var(--ease);
+    overflow:hidden;
+}
+
+.project:hover .project-visual{
+    transform:rotate(0) scale(1.03);
+}
+
+.fake-site{
+    padding:20px;
+}
+
+.fake-site-top{
+    height:7px;
+    width:35%;
+    background:rgba(255,255,255,.5);
+    border-radius:20px;
+}
+
+.fake-site-lines{
+    margin-top:70px;
+    display:flex;
+    flex-direction:column;
+    gap:8px;
+}
+
+.fake-site-lines span{
+    height:20px;
+    width:85%;
+    background:rgba(255,255,255,.12);
+    border-radius:5px;
+}
+
+.fake-site-lines span:nth-child(2){
+    width:65%;
+}
+
+.fake-site-lines span:nth-child(3){
+    width:45%;
+}
+
+.project-info{
+    position:absolute;
+    bottom:28px;
+    left:30px;
+    right:30px;
+    display:flex;
+    justify-content:space-between;
+    align-items:end;
+    z-index:2;
+}
+
+.project-name{
+    font-size:25px;
+    letter-spacing:-.05em;
+}
+
+.project-type{
+    color:#88847f;
+    font-size:11px;
+    margin-top:5px;
+}
+
+.project-open{
+    width:42px;
+    height:42px;
+    border:1px solid var(--line);
+    border-radius:50%;
+    display:grid;
+    place-items:center;
+    transition:.35s;
+}
+
+.project:hover .project-open{
+    background:var(--cream);
+    color:#111;
+    transform:rotate(45deg);
+}
+
+/* =========================================================
+   BENTO
+========================================================= */
+
+.bento{
+    margin-top:65px;
+    display:grid;
+    grid-template-columns:repeat(12,1fr);
+    gap:15px;
+}
+
+.bento-card{
+    border:1px solid var(--line);
+    border-radius:25px;
+    padding:30px;
+    background:#161616;
+    min-height:270px;
+    position:relative;
+    overflow:hidden;
+}
+
+.bento-card:nth-child(1){
+    grid-column:span 7;
+}
+
+.bento-card:nth-child(2){
+    grid-column:span 5;
+}
+
+.bento-card:nth-child(3){
+    grid-column:span 5;
+}
+
+.bento-card:nth-child(4){
+    grid-column:span 7;
+}
+
+.bento-card h3{
+    font-size:28px;
+    letter-spacing:-.05em;
+}
+
+.bento-card p{
+    color:#87837e;
+    max-width:390px;
+    font-size:13px;
+    line-height:1.7;
+    margin-top:15px;
+}
+
+.bento-number{
+    position:absolute;
+    right:25px;
+    bottom:20px;
+    font:11px "DM Mono",monospace;
+    color:#68645f;
+}
+
+.bento-line{
+    position:absolute;
+    right:-80px;
+    bottom:-80px;
+    width:240px;
+    height:240px;
+    border:1px solid rgba(185,75,100,.3);
+    border-radius:50%;
+}
+
+.bento-line::after{
+    content:"";
+    position:absolute;
+    inset:25px;
+    border:1px solid rgba(185,75,100,.2);
+    border-radius:50%;
+}
+
+/* =========================================================
+   NUMBERS
+========================================================= */
+
+.numbers{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    border-top:1px solid var(--line);
+    border-bottom:1px solid var(--line);
+}
+
+.number{
+    padding:45px 25px;
+    border-right:1px solid var(--line);
+}
+
+.number:last-child{
+    border-right:0;
+}
+
+.number-value{
+    font-size:clamp(45px,5vw,75px);
+    letter-spacing:-.08em;
+}
+
+.number-label{
+    color:#77736e;
+    font-size:11px;
+    margin-top:8px;
+}
+
+/* =========================================================
+   BUILDER
+========================================================= */
+
+.builder{
+    border:1px solid var(--line);
+    border-radius:32px;
+    overflow:hidden;
+    background:#151515;
+    margin-top:60px;
+}
+
+.builder-layout{
+    display:grid;
+    grid-template-columns:320px 1fr;
+    min-height:650px;
+}
+
+.builder-sidebar{
+    border-right:1px solid var(--line);
+    padding:25px;
+}
+
+.builder-heading{
+    font-size:14px;
+    margin-bottom:25px;
+}
+
+.builder-group{
+    margin-bottom:28px;
+}
+
+.builder-group-title{
+    font:9px "DM Mono",monospace;
+    color:#6e6a65;
+    text-transform:uppercase;
+    letter-spacing:.15em;
+    margin-bottom:10px;
+}
+
+.builder-options{
+    display:flex;
+    flex-wrap:wrap;
+    gap:6px;
+}
+
+.builder-option{
+    padding:10px 12px;
+    border:1px solid var(--line);
+    border-radius:10px;
+    background:transparent;
+    color:#8d8984;
+    font-size:11px;
+    transition:.3s;
+}
+
+.builder-option:hover,
+.builder-option.active{
+    background:#ebe4d8;
+    color:#111;
+    border-color:#ebe4d8;
+}
+
+.check-row{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    color:#99958f;
+    font-size:11px;
+    padding:9px 0;
+    border-bottom:1px solid rgba(255,255,255,.05);
+}
+
+.switch{
+    width:35px;
+    height:20px;
+    border-radius:30px;
+    background:#292929;
+    padding:3px;
+    cursor:pointer;
+    transition:.3s;
+}
+
+.switch::after{
+    content:"";
+    display:block;
+    width:14px;
+    height:14px;
+    background:#666;
+    border-radius:50%;
+    transition:.3s;
+}
+
+.switch.active{
+    background:var(--wine);
+}
+
+.switch.active::after{
+    transform:translateX(15px);
+    background:var(--cream);
+}
+
+.builder-preview{
+    padding:28px;
+    background:#0e0e0e;
+}
+
+.builder-browser{
+    height:100%;
+    border:1px solid var(--line);
+    border-radius:20px;
+    overflow:hidden;
+    background:#e8e0d5;
+    color:#151412;
+}
+
+.browser-top{
+    height:43px;
+    display:flex;
+    align-items:center;
+    gap:6px;
+    padding:0 14px;
+    border-bottom:1px solid rgba(0,0,0,.1);
+}
+
+.browser-top span{
+    width:6px;
+    height:6px;
+    border-radius:50%;
+    background:#999;
+}
+
+.builder-site{
+    padding:40px;
+    min-height:550px;
+}
+
+.builder-site-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.builder-site-logo{
+    font-size:13px;
+    font-weight:800;
+}
+
+.builder-site-nav{
+    display:flex;
+    gap:15px;
+    font-size:8px;
+    opacity:.5;
+}
+
+.builder-site-main{
+    padding-top:90px;
+}
+
+.builder-site-main small{
+    font:8px "DM Mono",monospace;
+    text-transform:uppercase;
+    opacity:.45;
+}
+
+.builder-site-main h3{
+    margin-top:12px;
+    font-size:clamp(45px,6vw,80px);
+    line-height:.86;
+    letter-spacing:-.08em;
+    max-width:650px;
+}
+
+.builder-site-main h3 i{
+    font-family:"Playfair Display",serif;
+    font-weight:500;
+}
+
+.builder-site-main p{
+    margin-top:25px;
+    max-width:350px;
+    font-size:10px;
+    line-height:1.6;
+    opacity:.55;
+}
+
+/* =========================================================
+   PRICE
+========================================================= */
+
+.price-layout{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:80px;
+    margin-top:65px;
+}
+
+.price-copy{
+    position:sticky;
+    top:120px;
+    height:max-content;
+}
+
+.price-copy p{
+    margin-top:25px;
+    max-width:450px;
+    color:#88847e;
+    line-height:1.7;
+    font-size:14px;
+}
+
+.price-card{
+    border:1px solid var(--line);
+    border-radius:30px;
+    background:#171717;
+    padding:32px;
+}
+
+.price-row{
+    padding:25px 0;
+    border-bottom:1px solid var(--line);
+}
+
+.price-row:first-child{
+    padding-top:0;
+}
+
+.price-row:last-child{
+    border-bottom:0;
+}
+
+.price-row-head{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.price-row-title{
+    font-size:14px;
+}
+
+.price-value{
+    font:12px "DM Mono",monospace;
+    color:#99958f;
+}
+
+.price-options{
+    display:flex;
+    flex-wrap:wrap;
+    gap:7px;
+    margin-top:13px;
+}
+
+.price-option{
+    padding:9px 12px;
+    border:1px solid var(--line);
+    border-radius:9px;
+    background:transparent;
+    color:#85817b;
+    font-size:10px;
+    transition:.3s;
+}
+
+.price-option.active{
+    background:var(--cream);
+    color:#111;
+    border-color:var(--cream);
+}
+
+.total{
+    margin-top:25px;
+    padding:25px;
+    border-radius:20px;
+    background:#202020;
+}
+
+.total-label{
+    color:#77736e;
+    font:9px "DM Mono",monospace;
+    text-transform:uppercase;
+}
+
+.total-price{
+    font-size:55px;
+    letter-spacing:-.08em;
+    margin-top:5px;
+}
+
+.total-note{
+    color:#77736e;
+    font-size:10px;
+    margin-top:8px;
+}
+
+/* =========================================================
+   PROCESS
+========================================================= */
+
+.process{
+    margin-top:65px;
+}
+
+.process-item{
+    display:grid;
+    grid-template-columns:80px 1fr 250px;
+    gap:30px;
+    align-items:center;
+    padding:30px 0;
+    border-top:1px solid var(--line);
+    transition:.4s;
+}
+
+.process-item:last-child{
+    border-bottom:1px solid var(--line);
+}
+
+.process-item:hover{
+    padding-left:15px;
+}
+
+.process-num{
+    font:11px "DM Mono",monospace;
+    color:#68645f;
+}
+
+.process-title{
+    font-size:27px;
+    letter-spacing:-.04em;
+}
+
+.process-description{
+    color:#77736e;
+    font-size:11px;
+    line-height:1.6;
+}
+
+/* =========================================================
+   FAQ
+========================================================= */
+
+.faq{
+    max-width:900px;
+    margin:65px auto 0;
+}
+
+.faq-item{
+    border-top:1px solid var(--line);
+}
+
+.faq-item:last-child{
+    border-bottom:1px solid var(--line);
+}
+
+.faq-question{
+    width:100%;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    background:transparent;
+    color:var(--text);
+    text-align:left;
+    padding:27px 0;
+    font-size:18px;
+    letter-spacing:-.025em;
+}
+
+.faq-icon{
+    width:32px;
+    height:32px;
+    border:1px solid var(--line);
+    border-radius:50%;
+    display:grid;
+    place-items:center;
+    color:#88847f;
+    transition:.4s;
+}
+
+.faq-answer{
+    max-height:0;
+    overflow:hidden;
+    color:#7e7a74;
+    font-size:13px;
+    line-height:1.8;
+    transition:max-height .6s var(--ease);
+}
+
+.faq-answer-inner{
+    padding:0 50px 25px 0;
+}
+
+.faq-item.open .faq-answer{
+    max-height:180px;
+}
+
+.faq-item.open .faq-icon{
+    transform:rotate(45deg);
+    background:var(--cream);
+    color:#111;
+}
+
+/* =========================================================
+   CTA
+========================================================= */
+
+.cta{
+    padding:190px 0 120px;
+    text-align:center;
+    position:relative;
+    overflow:hidden;
+}
+
+.cta-glow{
+    position:absolute;
+    width:600px;
+    height:600px;
+    left:50%;
+    top:30%;
+    transform:translate(-50%,-50%);
+    background:radial-gradient(circle,rgba(113,31,49,.3),transparent 65%);
+    pointer-events:none;
+}
+
+.cta h2{
+    position:relative;
+    font-size:clamp(65px,12vw,170px);
+    line-height:.8;
+    letter-spacing:-.095em;
+}
+
+.cta h2 em{
+    font-family:"Playfair Display",serif;
+    font-weight:500;
+}
+
+.cta p{
+    position:relative;
+    max-width:450px;
+    margin:40px auto;
+    color:#87837d;
+    line-height:1.7;
+    font-size:14px;
+}
+
+.cta .btn{
+    position:relative;
+}
+
+/* =========================================================
+   FOOTER
+========================================================= */
+
+footer{
+    border-top:1px solid var(--line);
+    padding:30px 0;
+}
+
+.footer-inner{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.footer-copy{
+    color:#625f5a;
+    font:10px "DM Mono",monospace;
+}
+
+.footer-links{
+    display:flex;
+    gap:20px;
+}
+
+.footer-links a{
+    color:#77736e;
+    font-size:11px;
+    transition:.3s;
+}
+
+.footer-links a:hover{
+    color:var(--cream);
+}
+
+/* =========================================================
+   MODAL
+========================================================= */
+
+.modal{
+    position:fixed;
+    inset:0;
+    z-index:2000;
+    background:rgba(0,0,0,.7);
+    backdrop-filter:blur(20px);
+    display:grid;
+    place-items:center;
+    padding:20px;
+    opacity:0;
+    pointer-events:none;
+    transition:.5s;
+}
+
+.modal.open{
+    opacity:1;
+    pointer-events:auto;
+}
+
+.modal-card{
+    width:min(620px,100%);
+    background:#191919;
+    border:1px solid var(--line);
+    border-radius:30px;
+    padding:35px;
+    transform:translateY(30px) scale(.97);
+    transition:.6s var(--ease);
+    position:relative;
+}
+
+.modal.open .modal-card{
+    transform:none;
+}
+
+.modal-close{
+    position:absolute;
+    right:20px;
+    top:20px;
+    width:38px;
+    height:38px;
+    border-radius:50%;
+    border:1px solid var(--line);
+    background:transparent;
+    color:var(--text);
+}
+
+.modal-title{
+    font-size:45px;
+    letter-spacing:-.07em;
+    line-height:.95;
+    max-width:450px;
+}
+
+.modal-subtitle{
+    margin-top:15px;
+    color:#77736e;
+    font-size:12px;
+    line-height:1.6;
+}
+
+.form{
+    margin-top:30px;
+}
+
+.form-group{
+    margin-bottom:12px;
+}
+
+.form-input{
+    width:100%;
+    background:#111;
+    border:1px solid var(--line);
+    border-radius:13px;
+    padding:16px;
+    color:var(--text);
+    outline:none;
+    transition:.3s;
+}
+
+.form-input:focus{
+    border-color:rgba(233,226,214,.5);
+}
+
+textarea.form-input{
+    min-height:120px;
+    resize:vertical;
+}
+
+.form-submit{
+    width:100%;
+    margin-top:5px;
+}
+
+/* =========================================================
+   REVEAL
+========================================================= */
+
+.reveal{
+    opacity:0;
+    transform:translateY(35px);
+    transition:
+        opacity .9s var(--ease),
+        transform .9s var(--ease);
+}
+
+.reveal.visible{
+    opacity:1;
+    transform:none;
+}
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media(max-width:1000px){
+
+    .nav{
+        padding:14px 15px;
+    }
+
+    .nav.scrolled{
+        padding:10px 15px;
+    }
+
+    .nav-links,
+    .nav-contact{
+        display:none;
+    }
+
+    .mobile-toggle{
+        display:block;
+    }
+
+    .container{
+        width:min(calc(100% - 30px),var(--max));
+    }
+
+    .section{
+        padding:100px 0;
+    }
+
+    .hero{
+        min-height:850px;
+    }
+
+    .hero-title{
+        font-size:clamp(60px,15vw,130px);
+    }
+
+    .hero-bottom{
+        grid-template-columns:1fr;
+        gap:30px;
+    }
+
+    .hero-actions{
+        justify-content:flex-start;
+    }
+
+    .intro{
+        grid-template-columns:1fr;
+        gap:30px;
+    }
+
+    .portfolio-grid{
+        grid-template-columns:1fr;
+    }
+
+    .project,
+    .project:nth-child(2),
+    .project:nth-child(3),
+    .project:nth-child(4){
+        margin:0;
+        min-height:500px;
+    }
+
+    .bento-card:nth-child(n){
+        grid-column:span 12;
+    }
+
+    .numbers{
+        grid-template-columns:1fr 1fr;
+    }
+
+    .number:nth-child(2){
+        border-right:0;
+    }
+
+    .number:nth-child(-n+2){
+        border-bottom:1px solid var(--line);
+    }
+
+    .builder-layout{
+        grid-template-columns:1fr;
+    }
+
+    .builder-sidebar{
+        border-right:0;
+        border-bottom:1px solid var(--line);
+    }
+
+    .price-layout{
+        grid-template-columns:1fr;
+        gap:40px;
+    }
+
+    .price-copy{
+        position:static;
+    }
+
+    .process-item{
+        grid-template-columns:50px 1fr;
+    }
+
+    .process-description{
+        grid-column:2;
+    }
+
+    .lab-screen,
+    .preview{
+        min-height:530px;
+    }
+}
+
+@media(max-width:600px){
+
+    .cursor,
+    .cursor-ring{
+        display:none;
+    }
+
+    .hero{
+        min-height:760px;
+    }
+
+    .hero-top{
+        margin-bottom:30px;
+    }
+
+    .hero-title{
+        font-size:clamp(55px,17vw,100px);
+    }
+
+    .hero-title .indent{
+        padding-left:4vw;
+    }
+
+    .hero-description{
+        font-size:14px;
+    }
+
+    .hero-actions{
+        flex-direction:column;
+    }
+
+    .hero-actions .btn{
+        width:100%;
+    }
+
+    .showroom-head{
+        display:block;
+    }
+
+    .showroom-head p{
+        margin-top:20px;
+    }
+
+    .lab-toolbar{
+        overflow:auto;
+    }
+
+    .lab-controls{
+        flex-shrink:0;
+    }
+
+    .preview{
+        padding:25px;
+    }
+
+    .preview-main{
+        padding-top:70px;
+    }
+
+    .preview-orb{
+        width:230px;
+        height:230px;
+        right:-50px;
+        bottom:0;
+    }
+
+    .portfolio-grid{
+        margin-top:40px;
+    }
+
+    .project{
+        min-height:420px!important;
+    }
+
+    .project-visual{
+        inset:50px 25px 90px;
+    }
+
+    .project-info{
+        left:20px;
+        right:20px;
+    }
+
+    .numbers{
+        grid-template-columns:1fr;
+    }
+
+    .number{
+        border-right:0;
+        border-bottom:1px solid var(--line);
+    }
+
+    .number:last-child{
+        border-bottom:0;
+    }
+
+    .builder-preview{
+        padding:12px;
+    }
+
+    .builder-site{
+        padding:25px;
+    }
+
+    .builder-site-main{
+        padding-top:70px;
+    }
+
+    .price-card{
+        padding:22px;
+    }
+
+    .total-price{
+        font-size:45px;
+    }
+
+    .process-title{
+        font-size:21px;
+    }
+
+    .faq-question{
+        font-size:15px;
+        gap:15px;
+    }
+
+    .cta{
+        padding:130px 0 90px;
+    }
+
+    .cta h2{
+        font-size:clamp(60px,17vw,100px);
+    }
+
+    .footer-inner{
+        flex-direction:column;
+        align-items:flex-start;
+        gap:20px;
+    }
+
+    .modal-card{
+        padding:25px;
+    }
+
+    .modal-title{
+        font-size:38px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="progress"></div>
+<div class="cursor"></div>
+<div class="cursor-ring"></div>
+
+<!-- =======================================================
+     NAV
+======================================================= -->
+
+<header class="nav" id="nav">
+    <div class="nav-inner">
+
+        <a href="#top" class="logo magnetic">
+            <span class="logo-dot"></span>
+            PRODUCT WEB
+        </a>
+
+        <nav class="nav-links">
+            <a href="#showroom">Демо</a>
+            <a href="#projects">Роботи</a>
+            <a href="#builder">Конструктор</a>
+            <a href="#price">Ціна</a>
+            <a href="#faq">FAQ</a>
+        </nav>
+
+        <button class="nav-contact magnetic open-modal">
+            Обговорити сайт
+        </button>
+
+        <button class="mobile-toggle" id="mobileToggle">
+            ☰
+        </button>
+
+    </div>
+</header>
+
+<!-- MOBILE -->
+
+<div class="mobile-menu" id="mobileMenu">
+    <nav class="mobile-menu-links">
+        <a href="#showroom">Демо</a>
+        <a href="#projects">Роботи</a>
+        <a href="#builder">Конструктор</a>
+        <a href="#price">Ціна</a>
+        <a href="#faq">FAQ</a>
+        <a href="#" class="open-modal">Замовити</a>
+    </nav>
+</div>
+
+<main id="top">
+
+<!-- =======================================================
+     HERO
+======================================================= -->
+
+<section class="hero">
+
+    <div class="hero-grid"></div>
+    <div class="hero-glow"></div>
+
+    <div class="container hero-content">
+
+        <div class="hero-top reveal">
+
+            <div class="eyebrow">
+                PRODUCT WEB / DIGITAL STUDIO
+            </div>
+
+            <div class="eyebrow live">
+                <span class="live-dot"></span>
+                Приймаємо нові проєкти
+            </div>
+
+        </div>
+
+        <h1 class="hero-title reveal">
+
+            <span class="line">САЙТ</span>
+
+            <span class="line indent serif">
+                який
+            </span>
+
+            <span class="line outline">
+                продає.
+            </span>
+
+        </h1>
+
+        <div class="hero-bottom reveal">
+
+            <p class="hero-description">
+                Створюємо сучасні сайти для бізнесу — від першого
+                екрану до заявки клієнта. Дизайн, структура,
+                анімації та адаптація під телефон в одному продукті.
+            </p>
+
+            <div class="hero-actions">
+
+                <button class="btn btn-primary magnetic open-modal">
+                    Замовити сайт
+                    <span class="btn-arrow">↗</span>
+                </button>
+
+                <a href="#showroom" class="btn btn-secondary magnetic">
+                    Подивитися демо
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- =======================================================
+     MARQUEE
+======================================================= -->
+
+<div class="marquee">
+
+    <div class="marquee-track">
+
+        <div class="marquee-item">
+            PRODUCT WEB
+            <span class="marquee-star">✦</span>
+            САЙТИ
+        </div>
+
+        <div class="marquee-item">
+            ДИЗАЙН
+            <span class="marquee-star">✦</span>
+            РОЗРОБКА
+        </div>
+
+        <div class="marquee-item">
+            БІЗНЕС
+            <span class="marquee-star">✦</span>
+            РЕЗУЛЬТАТ
+        </div>
+
+        <div class="marquee-item">
+            PRODUCT WEB
+            <span class="marquee-star">✦</span>
+            САЙТИ
+        </div>
+
+        <div class="marquee-item">
+            ДИЗАЙН
+            <span class="marquee-star">✦</span>
+            РОЗРОБКА
+        </div>
+
+        <div class="marquee-item">
+            БІЗНЕС
+            <span class="marquee-star">✦</span>
+            РЕЗУЛЬТАТ
+        </div>
+
+    </div>
+
+</div>
+
+<!-- =======================================================
+     INTRO
+======================================================= -->
+
+<section class="section">
+
+    <div class="container">
+
+        <div class="intro">
+
+            <div class="section-label reveal">
+                01 / Підхід
+            </div>
+
+            <div class="intro-copy reveal">
+
+                <p>
+                    Ми не просто робимо сторінку.
+                    <span>
+                        Ми створюємо цифрове представлення
+                        вашого бізнесу, яке хочеться відкрити,
+                        переглянути та запам'ятати.
+                    </span>
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- =======================================================
+     SHOWROOM
+======================================================= -->
+
+<section class="section showroom" id="showroom">
+
+    <div class="container">
+
+        <div class="showroom-head reveal">
+
+            <div>
+                <div class="section-label">
+                    02 / Інтерактивне демо
+                </div>
+
+                <h2 class="section-title">
+                    Подивись<br>
+                    <span class="serif">сам.</span>
+                </h2>
+            </div>
+
+            <p>
+                Обери тип бізнесу, стиль та пристрій.
+                Це приблизно те, як може виглядати
+                сайт після роботи PRODUCT WEB.
+            </p>
+
+        </div>
+
+        <div class="lab reveal">
+
+            <div class="lab-toolbar">
+
+                <div class="lab-left">
+
+                    <div class="window-dots">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+
+                    <div class="lab-url" id="labUrl">
+                        your-business.com
+                    </div>
+
+                </div>
+
+                <div class="lab-controls">
+
+                    <button class="lab-chip active" data-business="barber">
+                        Барбершоп
+                    </button>
+
+                    <button class="lab-chip" data-business="cafe">
+                        Кафе
+                    </button>
+
+                    <button class="lab-chip" data-business="shop">
+                        Магазин
+                    </button>
+
+                    <button class="lab-chip" data-business="salon">
+                        Салон
+                    </button>
+
+                </div>
+
+            </div>
+
+            <div class="lab-screen" id="labScreen">
+
+                <div class="preview-grid"></div>
+
+                <div class="preview">
+
+                    <div class="preview-nav">
+
+                        <div class="preview-logo" id="previewLogo">
+                            BARBER
+                        </div>
+
+                        <div class="preview-nav-links">
+                            <span>ПОСЛУГИ</span>
+                            <span>РОБОТИ</span>
+                            <span>КОНТАКТИ</span>
+                        </div>
+
+                    </div>
+
+                    <div class="preview-main">
+
+                        <div class="preview-kicker" id="previewKicker">
+                            BARBERSHOP / 2026
+                        </div>
+
+                        <div class="preview-title" id="previewTitle">
+                            Твій стиль.<br>
+                            <em>Твій барбер.</em>
+                        </div>
+
+                        <div class="preview-description" id="previewDescription">
+                            Сучасний сайт для барбершопу
+                            з послугами, роботами майстрів,
+                            контактами та записом.
+                        </div>
+
+                        <button class="preview-btn">
+                            Записатися ↗
+                        </button>
+
+                    </div>
+
+                    <div class="preview-orb"></div>
+
+                </div>
+
+            </div>
+
+            <div class="device-bar">
+
+                <button class="device-btn active" data-device="desktop">
+                    Комп'ютер
+                </button>
+
+                <button class="device-btn" data-device="phone">
+                    Телефон
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- =======================================================
+     PORTFOLIO
+======================================================= -->
+
+<section class="section" id="projects">
+
+    <div class="container">
+
+        <div class="section-label reveal">
+            03 / Напрямки
+        </div>
+
+        <h2 class="section-title reveal">
+            Різні бізнеси.<br>
+            <span class="serif">Один рівень.</span>
+        </h2>
+
+        <div class="portfolio-grid">
+
+            <article class="project tilt reveal" data-project="barber">
+
+                <div class="project-bg one"></div>
+
+                <div class="project-visual">
+
+                    <div class="fake-site">
+
+                        <div class="fake-site-top"></div>
+
+                        <div class="fake-site-lines">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="project-info">
+
+                    <div>
+                        <div class="project-name">BARBER</div>
+                        <div class="project-type">
+                            Сайт барбершопу
+                        </div>
+                    </div>
+
+                    <div class="project-open">
+                        ↗
+                    </div>
+
+                </div>
+
+            </article>
+
+            <article class="project tilt reveal" data-project="cafe">
+
+                <div class="project-bg two"></div>
+
+                <div class="project-visual">
+
+                    <div class="fake-site">
+
+                        <div class="fake-site-top"></div>
+
+                        <div class="fake-site-lines">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="project-info">
+
+                    <div>
+                        <div class="project-name">CAFE</div>
+                        <div class="project-type">
+                            Сайт кафе
+                        </div>
+                    </div>
+
+                    <div class="project-open">
+                        ↗
+                    </div>
+
+                </div>
+
+            </article>
+
+            <article class="project tilt reveal" data-project="shop">
+
+                <div class="project-bg three"></div>
+
+                <div class="project-visual">
+
+                    <div class="fake-site">
+
+                        <div class="fake-site-top"></div>
+
+                        <div class="fake-site-lines">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="project-info">
+
+                    <div>
+                        <div class="project-name">SHOP</div>
+                        <div class="project-type">
+                            Інтернет-магазин
+                        </div>
+                    </div>
+
+                    <div class="project-open">
+                        ↗
+                    </div>
+
+                </div>
+
+            </article>
+
+            <article class="project tilt reveal" data-project="business">
+
+                <div class="project-bg four"></div>
+
+                <div class="project-visual">
+
+                    <div class="fake-site">
+
+                        <div class="fake-site-top"></div>
+
+                        <div class="fake-site-lines">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="project-info">
+
+                    <div>
+                        <div class="project-name">BUSINESS</div>
+                        <div class="project-type">
+                            Індивідуальний проєкт
+                        </div>
+                    </div>
+
+                    <div class="project-open">
+                        ↗
+                    </div>
+
+                </div>
+
+            </article>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- =======================================================
+     BENTO
+======================================================= -->
+
+<section class="section">
+
+    <div class="container">
+
+        <div class="section-label reveal">
+            04 / Що всередині
+        </div>
+
+        <h2 class="section-title reveal">
+            Маленькі деталі.<br>
+            <span class="serif">Велике враження.</span>
+        </h2>
+
+        <div class="bento">
+
+            <div class="bento-card reveal">
+
+                <h3>Дизайн, який<br>не виглядає шаблонним.</h3>
+
+                <p>
+                    Побудова композиції, типографіка,
+                    кольори, ритм і мікродеталі підбираються
+                    під конкретний бізнес.
+                </p>
+
+                <div class="bento-line"></div>
+                <div class="bento-number">01</div>
+
+            </div>
+
+            <div class="bento-card reveal">
+
+                <h3>Телефон — перш за все.</h3>
+
+                <p>
+                    Сайт адаптується під смартфони,
+                    планшети та великі екрани.
+                </p>
+
+                <div class="bento-number">02</div>
+
+            </div>
+
+            <div class="bento-card reveal">
+
+                <h3>Швидкість.</h3>
+
+                <p>
+                    Без зайвого навантаження.
+                    Анімації працюють там, де вони
+                    реально покращують досвід.
+                </p>
+
+                <div class="bento-number">03</div>
+
+            </div>
+
+            <div class="bento-card reveal">
+
+                <h3>Механіка, яку хочеться досліджувати.</h3>
+
+                <p>
+                    Hover-ефекти, переходи, інтерактивні
+                    блоки, калькулятори, галереї та форми.
+                </p>
+
+                <div class="bento-line"></div>
+                <div class="bento-number">04</div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- =======================================================
+     NUMBERS
+======================================================= -->
+
+<section class="section">
+
+    <div class="container">
+
+        <div class="numbers reveal">
+
+            <div class="number">
+                <div class="number-value counter" data-target="100">0</div>
+                <div class="number-label">адаптація під мобільні</div>
+            </div>
+
+            <div class="number">
+                <div class="number-value counter" data-target="24">0</div>
+                <div class="number-label">години на зв'язку</div>
+            </div>
+
+            <div class="number">
+                <div class="number-value counter" data-target="5">0</div>
+                <div class="number-label">етапів роботи</div>
+            </div>
+
+            <div class="number">
+                <div class="number-value">
+                    1
+                </div>
+                <div class="number-label">сайт під ваш бізнес</div>
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- =======================================================
+     BUILDER
+======================================================= -->
+
+<section class="section" id="builder">
+
+    <div class="container">
+
+        <div class="section-label reveal">
+            05 / Конструктор
+        </div>
+
+        <h2 class="section-title reveal">
+            Збери свій<br>
+            <span class="serif">варіант.</span>
+        </h2>
+
+        <div class="builder reveal">
+
+            <div class="builder-layout">
+
+                <aside class="builder-sidebar">
+
+                    <div class="builder-heading">
+                        Налаштуй концепцію
+                    </div>
+
+                    <div class="builder-group">
+
+                        <div class="builder-group-title">
+                            Стиль
+                        </div>
+
+                        <div class="builder-options">
+
+                            <button class="builder-option active" data-style="editorial">
+                                Editorial
+                            </button>
+
+                            <button class="builder-option" data-style="minimal">
+                                Minimal
+                            </button>
+
+                            <button class="builder-option" data-style="dark">
+                                Dark
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                    <div class="builder-group">
+
+                        <div class="builder-group-title">
+                            Тип
+                        </div>
+
+                        <div class="builder-options">
+
+                            <button class="builder-option active">
+                                Бізнес
+                            </button>
+
+                            <button class="builder-option">
+                                Магазин
+                            </button>
+
+                            <button class="builder-option">
+                                Портфоліо
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                    <div class="builder-group">
+
+                        <div class="builder-group-title">
+                            Функції
+                        </div>
+
+                        <div class="check-row">
+                            <span>Анімації</span>
+                            <span class="switch active"></span>
+                        </div>
+
+                        <div class="check-row">
+                            <span>Галерея</span>
+                            <span class="switch active"></span>
+                        </div>
+
+                        <div class="check-row">
+                            <span>Форма заявки</span>
+                            <span class="switch active"></span>
+                        </div>
+
+                        <div class="check-row">
+                            <span>Калькулятор</span>
+                            <span class="switch"></span>
+                        </div>
+
+                    </div>
+
+                </aside>
+
+                <div class="builder-preview">
+
+                    <div class="builder-browser">
+
+                        <div class="browser-top">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </div>
+
+                        <div class="builder-site">
+
+                            <div class="builder-site-header">
+
+                                <div class="builder-site-logo">
+                                    YOUR BRAND
+                                </div>
+
+                                <div class="builder-site-nav">
+                                    ПОСЛУГИ
+                                    РОБОТИ
+                                    КОНТАКТИ
+                                </div>
+
+                            </div>
+
+                            <div class="builder-site-main">
+
+                                <small>
+                                    YOUR BUSINESS / 2026
+                                </small>
+
+                                <h3 id="builderTitle">
+                                    Сайт, який<br>
+                                    <i>працює на вас.</i>
+                                </h3>
+
+                                <p>
+                                    Візуальна концепція,
+                                    яка може бути адаптована
+                                    під ваш бренд та аудиторію.
+                                </p>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- =======================================================
+     PROCESS
+======================================================= -->
+
+<section class="section">
+
+    <div class="container">
+
+        <div class="section-label reveal">
+            06 / Процес
+        </div>
+
+        <h2 class="section-title reveal">
+            Від ідеї<br>
+            <span class="serif">до запуску.</span>
+        </h2>
+
+        <div class="process">
+
+            <div class="process-item reveal">
+
+                <div class="process-num">01</div>
+
+                <div class="process-title">
+                    Знайомство
+                </div>
+
+                <div class="process-description">
+                    Обговорюємо бізнес, цілі,
+                    стиль та потрібні функції.
+                </div>
+
+            </div>
+
+            <div class="process-item reveal">
+
+                <div class="process-num">02</div>
+
+                <div class="process-title">
+                    Концепція
+                </div>
+
+                <div class="process-description">
+                    Визначаємо структуру,
+                    візуальний напрямок та логіку.
+                </div>
+
+            </div>
+
+            <div class="process-item reveal">
+
+                <div class="process-num">03</div>
+
+                <div class="process-title">
+                    Дизайн
+                </div>
+
+                <div class="process-description">
+                    Створюємо екрани,
+                    композицію та деталі.
+                </div>
+
+            </div>
+
+            <div class="process-item reveal">
+
+                <div class="process-num">04</div>
+
+                <div class="process-title">
+                    Розробка
+                </div>
+
+                <div class="process-description">
+                    Перетворюємо дизайн
+                    на робочий сайт.
+                </div>
+
+            </div>
+
+            <div class="process-item reveal">
+
+                <div class="process-num">05</div>
+
+                <div class="process-title">
+                    Запуск
+                </div>
+
+                <div class="process-description">
+                    Перевіряємо адаптацію,
+                    форми та готуємо сайт до публікації.
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- =======================================================
+     PRICE
+======================================================= -->
+
+<section class="section" id="price">
+
+    <div class="container">
+
+        <div class="section-label reveal">
+            07 / Калькулятор
+        </div>
+
+        <div class="price-layout">
+
+            <div class="price-copy reveal">
+
+                <h2 class="section-title">
+                    Скільки<br>
+                    це <span class="serif">коштує?</span>
+                </h2>
+
+                <p>
+                    Обери потрібний формат та функції.
+                    Калькулятор покаже орієнтовну вартість
+                    проєкту.
+                </p>
+
+            </div>
+
+            <div class="price-card reveal">
+
+                <div class="price-row">
+
+                    <div class="price-row-head">
+                        <div class="price-row-title">
+                            Тип сайту
+                        </div>
+
+                        <div class="price-value" id="typePrice">
+                            2 500 ₴
+                        </div>
+                    </div>
+
+                    <div class="price-options">
+
+                        <button class="price-option active"
+                            data-price="2500"
+                            data-type="Лендінг">
+                            Лендінг
+                        </button>
+
+                        <button class="price-option"
+                            data-price="4500"
+                            data-type="Бізнес">
+                            Бізнес-сайт
+                        </button>
+
+                        <button class="price-option"
+                            data-price="7000"
+                            data-type="Магазин">
+                            Магазин
+                        </button>
+
+                    </div>
+
+                </div>
+
+                <div class="price-row">
+
+                    <div class="price-row-head">
+                        <div class="price-row-title">
+                            Сторінки
+                        </div>
+
+                        <div class="price-value" id="pagesPrice">
+                            +0 ₴
+                        </div>
+                    </div>
+
+                    <div class="price-options">
+
+                        <button class="price-option active"
+                            data-pages="1"
+                            data-add="0">
+                            1
+                        </button>
+
+                        <button class="price-option"
+                            data-pages="3"
+                            data-add="700">
+                            3
+                        </button>
+
+                        <button class="price-option"
+                            data-pages="5"
+                            data-add="1200">
+                            5
+                        </button>
+
+                        <button class="price-option"
+                            data-pages="8"
+                            data-add="2000">
+                            8+
+                        </button>
+
+                    </div>
+
+                </div>
+
+                <div class="price-row">
+
+                    <div class="price-row-head">
+                        <div class="price-row-title">
+                            Додатково
+                        </div>
+
+                        <div class="price-value" id="extraPrice">
+                            +0 ₴
+                        </div>
+                    </div>
+
+                    <div class="price-options">
+
+                        <button class="price-option extra"
+                            data-add="600">
+                            Анімації
+                        </button>
+
+                        <button class="price-option extra"
+                            data-add="800">
+                            Галерея
+                        </button>
+
+                        <button class="price-option extra"
+                            data-add="700">
+                            Калькулятор
+                        </button>
+
+                        <button class="price-option extra"
+                            data-add="500">
+                            Форма
+                        </button>
+
+                    </div>
+
+                </div>
+
+                <div class="total">
+
+                    <div class="total-label">
+                        Орієнтовна вартість
+                    </div>
+
+                    <div class="total-price" id="totalPrice">
+                        2 500 ₴
+                    </div>
+
+                    <div class="total-note">
+                        Фінальна ціна залежить від обсягу проєкту.
+                    </div>
+
+                </div>
+
+                <button class="btn btn-primary form-submit open-modal">
+                    Обговорити мій проєкт
+                    <span class="btn-arrow">↗</span>
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- =======================================================
+     FAQ
+======================================================= -->
+
+<section class="section" id="faq">
+
+    <div class="container">
+
+        <div class="section-label reveal">
+            08 / Питання
+        </div>
+
+        <h2 class="section-title reveal">
+            Ще щось<br>
+            <span class="serif">цікавить?</span>
+        </h2>
+
+        <div class="faq">
+
+            <div class="faq-item reveal">
+
+                <button class="faq-question">
+                    Скільки часу займає створення сайту?
+                    <span class="faq-icon">+</span>
+                </button>
+
+                <div class="faq-answer">
+                    <div class="faq-answer-inner">
+                        Термін залежить від обсягу. Простий сайт
+                        можна підготувати швидше, а великий проєкт
+                        потребує більше етапів та контенту.
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="faq-item reveal">
+
+                <button class="faq-question">
+                    Чи буде сайт працювати на телефоні?
+                    <span class="faq-icon">+</span>
+                </button>
+
+                <div class="faq-answer">
+                    <div class="faq-answer-inner">
+                        Так. Адаптивність є частиною розробки:
+                        сайт підлаштовується під смартфони,
+                        планшети та комп'ютери.
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="faq-item reveal">
+
+                <button class="faq-question">
+                    Чи можна додати мої фото та тексти?
+                    <span class="faq-icon">+</span>
+                </button>
+
+                <div class="faq-answer">
+                    <div class="faq-answer-inner">
+                        Так. Фото, логотип, тексти, послуги,
+                        контакти та інша інформація можуть бути
+                        інтегровані безпосередньо у ваш сайт.
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="faq-item reveal">
+
+                <button class="faq-question">
+                    Чи можна потім змінити сайт?
+                    <span class="faq-icon">+</span>
+                </button>
+
+                <div class="faq-answer">
+                    <div class="faq-answer-inner">
+                        Так. Структуру та функції можна розширювати:
+                        додавати сторінки, нові блоки, галереї,
+                        форми, каталог та інші можливості.
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="faq-item reveal">
+
+                <button class="faq-question">
+                    Як почати?
+                    <span class="faq-icon">+</span>
+                </button>
+
+                <div class="faq-answer">
+                    <div class="faq-answer-inner">
+                        Залиште заявку. Обговоримо ваш бізнес,
+                        бажаний стиль, функції та обсяг роботи.
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- =======================================================
+     CTA
+======================================================= -->
+
+<section class="cta">
+
+    <div class="cta-glow"></div>
+
+    <div class="container">
+
+        <div class="section-label reveal"
+             style="justify-content:center;">
+            09 / Почнемо
+        </div>
+
+        <h2 class="reveal">
+            Ваш сайт.<br>
+            <em>Ваш момент.</em>
+        </h2>
+
+        <p class="reveal">
+            Розкажіть про свій бізнес.
+            Ми перетворимо ідею на сайт,
+            який хочеться показати клієнтам.
+        </p>
+
+        <button class="btn btn-primary magnetic open-modal reveal">
+            Створити сайт
+            <span class="btn-arrow">↗</span>
+        </button>
+
+    </div>
+
+</section>
+
+</main>
+
+<!-- =======================================================
+     FOOTER
+======================================================= -->
+
+<footer>
+
+    <div class="container footer-inner">
+
+        <div class="footer-copy">
+            © 2026 PRODUCT WEB
+        </div>
+
+        <div class="footer-links">
+            <a href="#showroom">Демо</a>
+            <a href="#projects">Роботи</a>
+            <a href="#price">Ціна</a>
+            <a href="#faq">FAQ</a>
+        </div>
+
+    </div>
+
+</footer>
+
+<!-- =======================================================
+     MODAL
+======================================================= -->
+
+<div class="modal" id="modal">
+
+    <div class="modal-card">
+
+        <button class="modal-close" id="modalClose">
+            ×
+        </button>
+
+        <div class="section-label">
+            PRODUCT WEB / ЗАЯВКА
+        </div>
+
+        <h2 class="modal-title">
+            Розкажіть про<br>
+            <span class="serif">свій проєкт.</span>
+        </h2>
+
+        <p class="modal-subtitle">
+            Заповніть коротку форму.
+            Після цього ви отримаєте готовий текст
+            заявки, який можна надіслати нам.
+        </p>
+
+        <form class="form" id="leadForm">
+
+            <div class="form-group">
+
+                <input
+                    class="form-input"
+                    id="clientName"
+                    type="text"
+                    placeholder="Ваше ім'я"
+                    required
+                >
+
+            </div>
+
+            <div class="form-group">
+
+                <input
+                    class="form-input"
+                    id="clientContact"
+                    type="text"
+                    placeholder="Telegram / Instagram / телефон"
+                    required
+                >
+
+            </div>
+
+            <div class="form-group">
+
+                <textarea
+                    class="form-input"
+                    id="clientProject"
+                    placeholder="Що потрібно зробити?"
+                    required
+                ></textarea>
+
+            </div>
+
+            <button
+                class="btn btn-primary form-submit"
+                type="submit">
+                Підготувати заявку
+                <span class="btn-arrow">↗</span>
+            </button>
+
+        </form>
+
+    </div>
+
+</div>
+
+<script>
+/* =========================================================
+   PRODUCT WEB JS
+========================================================= */
+
+document.addEventListener("DOMContentLoaded",()=>{
+
+/* =========================================================
+   CURSOR
+========================================================= */
+
+const cursor=document.querySelector(".cursor");
+const ring=document.querySelector(".cursor-ring");
+
+let mouseX=window.innerWidth/2;
+let mouseY=window.innerHeight/2;
+let ringX=mouseX;
+let ringY=mouseY;
+
+window.addEventListener("mousemove",(e)=>{
+
+    mouseX=e.clientX;
+    mouseY=e.clientY;
+
+    if(cursor){
+        cursor.style.left=mouseX+"px";
+        cursor.style.top=mouseY+"px";
+    }
+
+});
+
+function animateCursor(){
+
+    ringX+=(mouseX-ringX)*.13;
+    ringY+=(mouseY-ringY)*.13;
+
+    if(ring){
+        ring.style.left=ringX+"px";
+        ring.style.top=ringY+"px";
+    }
+
+    requestAnimationFrame(animateCursor);
+}
+
+animateCursor();
+
+/* =========================================================
+   HOVER CURSOR
+========================================================= */
+
+document.querySelectorAll("a,button,.project,.builder-option,.price-option")
+.forEach(el=>{
+
+    el.addEventListener("mouseenter",()=>{
+        document.body.classList.add("hovering");
+    });
+
+    el.addEventListener("mouseleave",()=>{
+        document.body.classList.remove("hovering");
+    });
+
+});
+
+/* =========================================================
+   NAV SCROLL
+========================================================= */
+
+const nav=document.getElementById("nav");
+
+window.addEventListener("scroll",()=>{
+
+    if(window.scrollY>50){
+        nav.classList.add("scrolled");
+    }else{
+        nav.classList.remove("scrolled");
+    }
+
+});
+
+/* =========================================================
+   PROGRESS
+========================================================= */
+
+const progress=document.querySelector(".progress");
+
+window.addEventListener("scroll",()=>{
+
+    const max=document.documentElement.scrollHeight-window.innerHeight;
+
+    const percent=(window.scrollY/max)*100;
+
+    progress.style.width=percent+"%";
+
+});
+
+/* =========================================================
+   REVEAL
+========================================================= */
+
+const revealObserver=new IntersectionObserver(
+(entries)=>{
+    entries.forEach(entry=>{
+
+        if(entry.isIntersecting){
+
+            entry.target.classList.add("visible");
+
+            revealObserver.unobserve(entry.target);
+
+        }
+
+    });
+},
+{
+    threshold:.12
+});
+
+document.querySelectorAll(".reveal")
+.forEach(el=>revealObserver.observe(el));
+
+/* =========================================================
+   COUNTERS
+========================================================= */
+
+const counters=document.querySelectorAll(".counter");
+
+const counterObserver=new IntersectionObserver(
+(entries)=>{
+    entries.forEach(entry=>{
+
+        if(!entry.isIntersecting) return;
+
+        const el=entry.target;
+        const target=Number(el.dataset.target);
+
+        let current=0;
+        const duration=1300;
+        const start=performance.now();
+
+        function update(now){
+
+            const progress=Math.min((now-start)/duration,1);
+
+            const eased=1-Math.pow(1-progress,3);
+
+            current=Math.floor(target*eased);
+
+            el.textContent=current;
+
+            if(progress<1){
+                requestAnimationFrame(update);
+            }else{
+                el.textContent=target;
+            }
+
+        }
+
+        requestAnimationFrame(update);
+
+        counterObserver.unobserve(el);
+
+    });
+},
+{
+    threshold:.5
+});
+
+counters.forEach(el=>counterObserver.observe(el));
+
+/* =========================================================
+   MAGNETIC BUTTONS
+========================================================= */
+
+document.querySelectorAll(".magnetic").forEach(el=>{
+
+    el.addEventListener("mousemove",(e)=>{
+
+        const rect=el.getBoundingClientRect();
+
+        const x=e.clientX-rect.left-rect.width/2;
+        const y=e.clientY-rect.top-rect.height/2;
+
+        el.style.transform=
+            `translate(${x*.12}px,${y*.12}px)`;
+
+    });
+
+    el.addEventListener("mouseleave",()=>{
+
+        el.style.transform="";
+
+    });
+
+});
+
+/* =========================================================
+   TILT PROJECTS
+========================================================= */
+
+document.querySelectorAll(".tilt").forEach(card=>{
+
+    card.addEventListener("mousemove",(e)=>{
+
+        if(window.innerWidth<900) return;
+
+        const rect=card.getBoundingClientRect();
+
+        const x=e.clientX-rect.left;
+        const y=e.clientY-rect.top;
+
+        const rotateY=((x/rect.width)-.5)*8;
+        const rotateX=((y/rect.height)-.5)*-8;
+
+        card.style.transform=
+            `perspective(900px)
+             rotateX(${rotateX}deg)
+             rotateY(${rotateY}deg)
+             translateY(-4px)`;
+
+    });
+
+    card.addEventListener("mouseleave",()=>{
+
+        card.style.transform="";
+
+    });
+
+});
+
+/* =========================================================
+   SHOWROOM BUSINESS SWITCH
+========================================================= */
+
+const businessData={
+
+    barber:{
+        logo:"BARBER",
+        kicker:"BARBERSHOP / 2026",
+        title:"Твій стиль.<br><em>Твій барбер.</em>",
+        description:
+        "Сучасний сайт для барбершопу з послугами, роботами майстрів, контактами та записом.",
+        theme:""
+    },
+
+    cafe:{
+        logo:"CAFÉ",
+        kicker:"COFFEE & FOOD / 2026",
+        title:"Смак, який<br><em>хочеться повторити.</em>",
+        description:
+        "Атмосферний сайт кафе з меню, фотографіями, адресою та швидким контактом.",
+        theme:"dark"
+    },
+
+    shop:{
+        logo:"STORE",
+        kicker:"ONLINE STORE / 2026",
+        title:"Знайди своє.<br><em>Обери зараз.</em>",
+        description:
+        "Сучасна презентація магазину з товарами, категоріями, деталями та замовленням.",
+        theme:"wine"
+    },
+
+    salon:{
+        logo:"SALON",
+        kicker:"BEAUTY SPACE / 2026",
+        title:"Твоя краса.<br><em>Твій простір.</em>",
+        description:
+        "Елегантний сайт салону з послугами, майстрами, галереєю та записом.",
+        theme:""
+    }
+
+};
+
+const businessButtons=document.querySelectorAll(".lab-chip");
+const screen=document.getElementById("labScreen");
+const logo=document.getElementById("previewLogo");
+const kicker=document.getElementById("previewKicker");
+const title=document.getElementById("previewTitle");
+const description=document.getElementById("previewDescription");
+const url=document.getElementById("labUrl");
+
+businessButtons.forEach(button=>{
+
+    button.addEventListener("click",()=>{
+
+        businessButtons.forEach(b=>b.classList.remove("active"));
+        button.classList.add("active");
+
+        const key=button.dataset.business;
+        const data=businessData[key];
+
+        logo.textContent=data.logo;
+        kicker.textContent=data.kicker;
+        title.innerHTML=data.title;
+        description.textContent=data.description;
+
+        screen.classList.remove("dark","wine");
+
+        if(data.theme){
+            screen.classList.add(data.theme);
+        }
+
+        url.textContent=
+            key+"-studio.com";
+
+    });
+
+});
+
+/* =========================================================
+   DEVICE SWITCH
+========================================================= */
+
+const deviceButtons=document.querySelectorAll(".device-btn");
+const lab=document.querySelector(".lab");
+
+deviceButtons.forEach(button=>{
+
+    button.addEventListener("click",()=>{
+
+        deviceButtons.forEach(b=>b.classList.remove("active"));
+        button.classList.add("active");
+
+        if(button.dataset.device==="phone"){
+
+            lab.style.maxWidth="620px";
+            lab.style.margin="0 auto";
+
+        }else{
+
+            lab.style.maxWidth="";
+            lab.style.margin="";
+
+        }
+
+    });
+
+});
+
+/* =========================================================
+   BUILDER OPTIONS
+========================================================= */
+
+const builderOptions=document.querySelectorAll(".builder-option");
+
+builderOptions.forEach(button=>{
+
+    button.addEventListener("click",()=>{
+
+        const parent=button.parentElement;
+
+        parent.querySelectorAll(".builder-option")
+        .forEach(b=>b.classList.remove("active"));
+
+        button.classList.add("active");
+
+        const style=button.dataset.style;
+
+        const browser=document.querySelector(".builder-browser");
+        const title=document.getElementById("builderTitle");
+
+        if(style==="dark"){
+
+            browser.style.background="#171717";
+            browser.style.color="#f3eee5";
+
+            title.innerHTML=
+                "Темний стиль.<br><i>Сильне враження.</i>";
+
+        }else if(style==="minimal"){
+
+            browser.style.background="#f7f4ed";
+            browser.style.color="#171717";
+
+            title.innerHTML=
+                "Менше шуму.<br><i>Більше сенсу.</i>";
+
+        }else{
+
+            browser.style.background="#e8e0d5";
+            browser.style.color="#151412";
+
+            title.innerHTML=
+                "Сайт, який<br><i>працює на вас.</i>";
+
+        }
+
+    });
+
+});
+
+/* =========================================================
+   SWITCHES
+========================================================= */
+
+document.querySelectorAll(".switch").forEach(sw=>{
+
+    sw.addEventListener("click",()=>{
+
+        sw.classList.toggle("active");
+
+    });
+
+});
+
+/* =========================================================
+   PRICE CALCULATOR
+========================================================= */
+
+let basePrice=2500;
+let pagesAdd=0;
+let extras=0;
+
+const totalPrice=document.getElementById("totalPrice");
+const typePrice=document.getElementById("typePrice");
+const pagesPrice=document.getElementById("pagesPrice");
+const extraPrice=document.getElementById("extraPrice");
+
+function formatPrice(value){
+
+    return value
+        .toLocaleString("uk-UA")
+        .replace(/\u00A0/g," ")+" ₴";
+
+}
+
+function updatePrice(){
+
+    const total=basePrice+pagesAdd+extras;
+
+    totalPrice.textContent=formatPrice(total);
+    pagesPrice.textContent=
+        pagesAdd>0 ? "+"+formatPrice(pagesAdd) : "+0 ₴";
+    extraPrice.textContent=
+        extras>0 ? "+"+formatPrice(extras) : "+0 ₴";
+
+}
+
+document.querySelectorAll(".price-option").forEach(button=>{
+
+    button.addEventListener("click",()=>{
+
+        if(button.classList.contains("extra")){
+
+            button.classList.toggle("active");
+
+            extras=0;
+
+            document.querySelectorAll(".price-option.extra.active")
+            .forEach(active=>{
+                extras+=Number(active.dataset.add||0);
+            });
+
+        }else{
+
+            const parent=button.parentElement;
+
+            parent.querySelectorAll(".price-option")
+            .forEach(b=>b.classList.remove("active"));
+
+            button.classList.add("active");
+
+            if(button.dataset.price){
+
+                basePrice=Number(button.dataset.price);
+
+                typePrice.textContent=
+                    formatPrice(basePrice);
+
+            }
+
+            if(button.dataset.pages){
+
+                pagesAdd=Number(button.dataset.add||0);
+
+            }
+
+        }
+
+        updatePrice();
+
+    });
+
+});
+
+/* =========================================================
+   FAQ
+========================================================= */
+
+document.querySelectorAll(".faq-question")
+.forEach(question=>{
+
+    question.addEventListener("click",()=>{
+
+        const item=question.parentElement;
+
+        document.querySelectorAll(".faq-item")
+        .forEach(other=>{
+
+            if(other!==item){
+                other.classList.remove("open");
+            }
+
+        });
+
+        item.classList.toggle("open");
+
+    });
+
+});
+
+/* =========================================================
+   MOBILE MENU
+========================================================= */
+
+const mobileToggle=document.getElementById("mobileToggle");
+const mobileMenu=document.getElementById("mobileMenu");
+
+mobileToggle.addEventListener("click",()=>{
+
+    mobileMenu.classList.toggle("open");
+
+});
+
+mobileMenu.querySelectorAll("a")
+.forEach(link=>{
+
+    link.addEventListener("click",()=>{
+
+        mobileMenu.classList.remove("open");
+
+    });
+
+});
+
+/* =========================================================
+   MODAL
+========================================================= */
+
+const modal=document.getElementById("modal");
+const modalClose=document.getElementById("modalClose");
+
+function openModal(){
+
+    modal.classList.add("open");
+    document.body.classList.add("locked");
+
+}
+
+function closeModal(){
+
+    modal.classList.remove("open");
+    document.body.classList.remove("locked");
+
+}
+
+document.querySelectorAll(".open-modal")
+.forEach(button=>{
+
+    button.addEventListener("click",(e)=>{
+
+        e.preventDefault();
+
+        openModal();
+
+    });
+
+});
+
+modalClose.addEventListener("click",closeModal);
+
+modal.addEventListener("click",(e)=>{
+
+    if(e.target===modal){
+        closeModal();
+    }
+
+});
+
+document.addEventListener("keydown",(e)=>{
+
+    if(e.key==="Escape"){
+        closeModal();
+    }
+
+});
+
+/* =========================================================
+   LEAD FORM
+========================================================= */
+
+const form=document.getElementById("leadForm");
+
+form.addEventListener("submit",(e)=>{
+
+    e.preventDefault();
+
+    const name=
+        document.getElementById("clientName").value.trim();
+
+    const contact=
+        document.getElementById("clientContact").value.trim();
+
+    const project=
+        document.getElementById("clientProject").value.trim();
+
+    const message=
+`Заявка на сайт — PRODUCT WEB
+
+Ім'я: ${name}
+Контакт: ${contact}
+
+Проєкт:
+${project}`;
+
+    navigator.clipboard.writeText(message)
+    .then(()=>{
+
+        const button=form.querySelector("button");
+
+        button.innerHTML=
+            "Заявку скопійовано ✓";
+
+        button.style.background="#8d344b";
+        button.style.color="#fff";
+
+        setTimeout(()=>{
+
+            button.innerHTML=
+                'Підготувати заявку <span class="btn-arrow">↗</span>';
+
+            button.style.background="";
+            button.style.color="";
+
+        },3000);
+
+    })
+    .catch(()=>{
+
+        alert(
+            "Заявку підготовлено. Скопіюйте її вручну та надішліть у ваш канал зв'язку."
+        );
+
+    });
+
+});
+
+/* =========================================================
+   SMOOTH ANCHORS
+========================================================= */
+
+document.querySelectorAll('a[href^="#"]')
+.forEach(link=>{
+
+    link.addEventListener("click",(e)=>{
+
+        const href=link.getAttribute("href");
+
+        if(!href || href==="#") return;
+
+        const target=document.querySelector(href);
+
+        if(target){
+
+            e.preventDefault();
+
+            target.scrollIntoView({
+                behavior:"smooth",
+                block:"start"
+            });
+
+        }
+
+    });
+
+});
+
+/* =========================================================
+   PARALLAX HERO
+========================================================= */
+
+const heroGlow=document.querySelector(".hero-glow");
+
+window.addEventListener("mousemove",(e)=>{
+
+    if(!heroGlow) return;
+
+    const x=(e.clientX/window.innerWidth-.5);
+    const y=(e.clientY/window.innerHeight-.5);
+
+    heroGlow.style.transform=
+        `translate(${x*35}px,${y*35}px)`;
+
+});
+
+/* =========================================================
+   ESCAPE KEY
+========================================================= */
+
+document.addEventListener("keydown",(e)=>{
+
+    if(e.key==="Escape"){
+
+        mobileMenu.classList.remove("open");
+
+    }
+
+});
+
+});
+</script>
+
+</body>
+</html>
